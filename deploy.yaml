@@ -54,8 +54,6 @@ metadata:
   namespace: production
   annotations:
     kubernetes.io/ingress.class: "traefik"
-    certmanager.k8s.io/issuer: "letsencrypt-prod"
-    certmanager.k8s.io/acme-challenge-type: http01
 spec:
   rules:
     - host: cv.mauriballes.com
@@ -68,4 +66,3 @@ spec:
   tls:
     - hosts:
         - cv.mauriballes.com
-      secretName: "cv.mauriballes.com-production-tls"
