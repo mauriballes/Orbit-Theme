@@ -52,6 +52,10 @@ kind: Ingress
 metadata:
   name: cv-ingress
   namespace: production
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
     - host: cv.mauriballes.com
@@ -61,3 +65,7 @@ spec:
             backend:
               serviceName: cv-service
               servicePort: 80
+  tls:
+    - secretName: cv-tls-cert
+      hosts:
+        - cv.maurriballes.com
