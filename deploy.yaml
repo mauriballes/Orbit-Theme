@@ -46,3 +46,18 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cv-ingress
+  namespace: production
+spec:
+  rules:
+    - host: cv.mauriballes.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: cv-service
+              servicePort: 80
