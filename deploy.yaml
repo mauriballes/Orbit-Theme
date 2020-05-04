@@ -47,22 +47,21 @@ spec:
       port: 80
       targetPort: 80
 ---
-apiVersion: extensions/v1beta1
-kind: Ingress
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
 metadata:
   name: cv-ingress
   namespace: production
   annotations:
     kubernetes.io/ingress.class: "traefik"
 spec:
-  rules:
-    - host: cv.mauriballes.com
-      http:
-        paths:
-          - path: /
-            backend:
-              serviceName: cv-service
-              servicePort: 80
-  tls:
-    - hosts:
-        - cv.mauriballes.com
+  entryPoints:
+    - web
+  routes:
+    - kind: Rule
+      match: Host(`cv.mauriballes.com`) && PathPrefix(`/`)
+      priority: 0
+      services:
+        - kind: Service
+          name: cv-service
+          port: 80
