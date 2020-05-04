@@ -68,3 +68,4 @@ spec:
   tls:
     - hosts:
         - cv.mauriballes.com
+      secretName: "cv.mauriballes.com-production-tls"
