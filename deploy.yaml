@@ -52,6 +52,8 @@ kind: Ingress
 metadata:
   name: cv-ingress
   namespace: production
+  annotations:
+    kubernetes.io/ingress.class: "traefik"
 spec:
   rules:
     - host: cv.mauriballes.com
