@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: cv
-          image: mauriballes/cv:1.1
+          image: mauriballes/cv:1.2
           ports:
             - containerPort: 80
           resources:
@@ -52,7 +52,14 @@ kind: Ingress
 metadata:
   name: cv-ingress
   namespace: production
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/issuer: "letsencrypt-prod"
 spec:
+  tls:
+    - hosts:
+        - cv.mauriballes.com
+      secretName: cv-tls
   rules:
     - host: cv.mauriballes.com
       http:
